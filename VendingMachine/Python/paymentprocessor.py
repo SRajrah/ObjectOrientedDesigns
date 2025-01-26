@@ -1,8 +1,8 @@
 from moneytype import MoneyType
 from money import Money
-
 class PaymentProcessor:
-    def __init__(self):
+    def __init__(self, machine):
+        self.__machine = machine
         self.__current_balance = 0.0
 
         #accepted denominations
@@ -23,12 +23,12 @@ class PaymentProcessor:
         if money.get_value() in self.__accepted_denominations:
             self.__current_balance += money.get_value()
         else:
-            self.display.show_message(f"Rejected : {money}")
+            self.__machine.display.show_message(f"Rejected : {money}")
     
     #calculate and dispense change
     def calculate_change(self, amount: float):
         if self.__current_balance < amount:
-            self.display.show_message(f"Insufficient funds. Please add more money : ${amount - self.__current_balance}")
+            self.__machine.display.show_message(f"Insufficient funds. Please add more money : ${amount - self.__current_balance}")
             self.refund_amount()
             return None
         
@@ -39,8 +39,8 @@ class PaymentProcessor:
             return change_given
         
         if change_to_return >  sum([val * qty for val, qty in self.__change_available.items()]):
-            self.display.show_message("Machine low on change.")
-            self.notification.send_notification("Machine is low in change. Please refill change.")
+            self.__machine.display.show_message("Machine low on change.")
+            self.__machine.notification.send_notification("Machine is low in change. Please refill change.")
             self.refund_amount()
             return None
         
@@ -51,9 +51,9 @@ class PaymentProcessor:
                 change_given.append(Money(value, self.__accepted_denominations[value].get_money_type()))
         
         if change_to_return > 0:
-            self.display.show_message("Unable to return exact change.")
+            self.__machine.display.show_message("Unable to return exact change.")
             self.refund_amount()
-            self.notification.send_notification("Machine is low on change. Please refill change.")
+            self.__machine.notification.send_notification("Machine is low on change. Please refill change.")
             return None
 
         self.__current_balance = 0
@@ -62,7 +62,7 @@ class PaymentProcessor:
     def refund_amount(self):
         refunded_amount = self.__current_balance
         self.__current_balance = 0.0
-        self.display.show_message(f'Amount refunded: {refunded_amount}')
+        self.__machine.display.show_message(f'Amount refunded: {refunded_amount}')
         return refunded_amount
     
     def get_current_balance(self):
@@ -75,7 +75,7 @@ class PaymentProcessor:
             else:
                 self.__change_available[money.get_value()] = quantity
         else:
-            self.display.show_message(f"{money.get_value()} not an accepted denomination.")
+            self.__machine.display.show_message(f"{money.get_value()} not an accepted denomination.")
     
     def get_available_change(self):
         return self.__change_available

@@ -31,7 +31,7 @@ class VendingMachine:
             self.display = Display()
             self.notification = Notification(owner_contact)
             self.inventory = Inventory()
-            self.payment_processor = PaymentProcessor()
+            self.payment_processor = PaymentProcessor(self)
             self.selected_product =  None
 
     def set_state(self, state: VendingMachineState):

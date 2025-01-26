@@ -21,14 +21,13 @@ Chocoloate = Product(3, 'Five Star', 3.75)
 machine.inventory.add_product(Pepsi, 1, 10)
 machine.inventory.add_product(Cola, 2, 5)
 machine.inventory.add_product(Lays, 3, 10)
-machine.inventory.add_product(Lays, 4, 10)
+machine.inventory.add_product(Chocoloate, 4, 10)
 
 #select product on the machine using aisle Id
 machine.select_product(1)
 
 #user inserts money coin/bills one by one in the machine
-money = Money(1.00, MoneyType.BILL)
-machine.insert_money(money)
+money = Money(1.25, MoneyType.BILL)
 machine.insert_money(money)
 
 
