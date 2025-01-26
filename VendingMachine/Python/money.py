@@ -16,14 +16,14 @@ class Money:
         return f"{self.__money_type.value} (${self.__value:.2f})"
     
 
-# Create Money instances
-coin = Money(0.25, MoneyType.COIN)
-bill = Money(1.00, MoneyType.BILL)
+# # Create Money instances
+# coin = Money(0.25, MoneyType.COIN)
+# bill = Money(1.00, MoneyType.BILL)
 
-# Display the money details
-print(coin)  # Output: Coin($0.25)
-print(bill)  # Output: Bill($1.00)
+# # Display the money details
+# print(coin)  # Output: Coin($0.25)
+# print(bill)  # Output: Bill($1.00)
 
-# Access the attributes
-print("Coin value:", coin.get_value())  # Output: 0.25
-print("Bill type:", bill.get_money_type())  # Output: MoneyType.BILL
+# # Access the attributes
+# print("Coin value:", coin.get_value())  # Output: 0.25
+# print("Bill type:", bill.get_money_type())  # Output: MoneyType.BILL

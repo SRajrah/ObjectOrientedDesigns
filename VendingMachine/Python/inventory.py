@@ -1,13 +1,18 @@
 from product import Product
+from collections import deque
 class Inventory:
     def __init__(self):
         self.__product_stock = {}
-    
-    def add_product(self, product, qty: int):
+        self.__aisle_to_product_map = {}
+
+    def add_product(self, product, aisle_id, qty: int):
         if product in self.__product_stock:
             self.__product_stock[product]  += qty
         else:
             self.__product_stock[product]  = qty
+        
+        self.__aisle_to_product_map[aisle_id] = product
+    
     
     def reduce_product_qty(self, product, qty: int = 1):
         if product in self.__product_stock and self.__product_stock[product] >= qty:
@@ -20,6 +25,10 @@ class Inventory:
 
     def get_product_qty(self, product):
         return self.__product_stock.get(product, 0)
+    
+    def get_product(self, aisle_id: int) -> Product:
+        if aisle_id in self.__aisle_to_product_map:
+            return self.__aisle_to_product_map[aisle_id]
     
     def __str__(self):
         return "\n".join(
