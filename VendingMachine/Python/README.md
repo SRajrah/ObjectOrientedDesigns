@@ -1,1 +1,1 @@
-![Vending Machine Diagram](vendingMlatest.png)
+![Vending Machine Diagram](vendingMLatest.png)
