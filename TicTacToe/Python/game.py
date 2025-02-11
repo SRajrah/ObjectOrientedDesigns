@@ -55,6 +55,7 @@ class Game:
         #start the game loop
         while not self.winner and not self.board.is_full():
             #current players's turn.
+            print(f"{self.current_player}'s Turn. ")
             row, col = self.current_player.make_move(self.board)
             self.play_turn(row, col)
             
