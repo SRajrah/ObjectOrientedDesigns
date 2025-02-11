@@ -55,8 +55,9 @@ class Game:
         #start the game loop
         while not self.winner and not self.board.is_full():
             #current players's turn.
-            row, col = map(int, input(f"{self.current_player}'s turn. Enter Row, Col for your move : ").split())
+            row, col = self.current_player.make_move(self.board)
             self.play_turn(row, col)
+            
         
         if self.winner:
             print(f'Congratulations! Player : {self.winner} wins.')
