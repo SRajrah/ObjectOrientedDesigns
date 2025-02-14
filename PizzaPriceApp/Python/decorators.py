@@ -3,7 +3,7 @@ class ExtraCheeseDecorator(Pizza):
     def __init__(self, pizza : Pizza):
         self.pizza = pizza
     
-    def calculate_prince(self):
+    def calculate_price(self):
         return self.pizza.calculate_price() + 2.0
     
     def __getattr__(self, attr):

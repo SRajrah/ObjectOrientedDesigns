@@ -4,13 +4,13 @@ from customPizza import CustomPizza
 from enums import Size, CrustType, ToppingType
 from topping import Topping
 from decorators import ExtraCheeseDecorator
-from discounts import PercentageDiscount
+from discounts import PercentageDiscount, FixedAmountDiscount
 
-margherita = PredefinedPizza("Margherita")
+margherita = PredefinedPizza("Margherita") #factory
 margherita.add_topping(Topping("Olives", 1.2, ToppingType.VEGAN))
 print(margherita)
 print("Price: $", margherita.calculate_price())
-margherita.set_discount(PercentageDiscount(10))
+margherita.set_discount(FixedAmountDiscount(10))
 print("Price after discount : $", margherita.calculate_price())
 
 
